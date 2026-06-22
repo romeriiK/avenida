@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AvenidaEsSection } from "@/components/banda/avenida-es-section";
 
 const BAND_PHOTOS = [
   { name: "Nacho", src: "/assets/fotos/nacho.webp" },
@@ -161,41 +162,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BAND members grid */}
-      <section className="px-4 sm:px-8 lg:px-12 py-16 sm:py-20 border-t border-avenida-surface/30">
-        <div className="flex items-baseline gap-3 mb-8">
-          <span className="text-xl lg:text-2xl font-extrabold text-avenida-text-muted">
-            05
-          </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
-            AVENIDA ES
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
-          {BAND_PHOTOS.map((member, i) => (
-            <Link
-              key={member.name}
-              href="/avenidaes"
-              className="relative aspect-[3/4] overflow-hidden group animate-in"
-              style={{ animationDelay: `${0.08 * i}s` }}
-            >
-              <Image
-                src={member.src}
-                alt={member.name}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 15vw"
-              />
-              <div className="absolute inset-0 bg-avenida-blue/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                <span className="text-avenida-text font-bold text-sm">
-                  {member.name}
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* AVENIDA ES — interactive muñecos section */}
+      <AvenidaEsSection />
     </div>
   );
 }
