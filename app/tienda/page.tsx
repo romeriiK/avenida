@@ -5,7 +5,6 @@ const PRODUCTS = [
     name: "CAMISETA OVERSIZE",
     price: "26€",
     img: "/assets/merch/frontal_izq_oversized.webp",
-    imgBack: "/assets/merch/trasera_oversized.webp",
     desc: "Doble impresión frontal + trasera",
     sizes: ["S", "M", "L", "XL"],
   },
@@ -20,37 +19,46 @@ const PRODUCTS = [
 
 export default function TiendaPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-      <p className="section-num">03</p>
-      <h1 className="hero-title !text-4xl sm:!text-6xl md:!text-7xl mb-4">TIENDA</h1>
+    <div className="min-h-dvh px-4 sm:px-8 lg:px-12 py-12 sm:py-16">
+      {/* Header */}
+      <div className="flex items-baseline gap-3 mb-8">
+        <span className="text-xl lg:text-2xl font-extrabold text-avenida-text-muted">
+          03
+        </span>
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          TIENDA
+        </h1>
+      </div>
+
       <p className="text-avenida-text-muted text-sm sm:text-base mb-10 max-w-lg">
         Merch oficial de Avenida. Posibilidad de firma y personalización.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+      {/* Products grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-4xl">
         {PRODUCTS.map((product, i) => (
           <div
             key={product.name}
-            className="merch-card animate-in"
+            className="group animate-in"
             style={{ animationDelay: `${0.15 * i}s` }}
           >
             {/* Product image */}
-            <div className="relative aspect-square bg-avenida-surface/50 overflow-hidden">
+            <div className="relative aspect-[4/3] bg-avenida-dark/30 overflow-hidden mb-4">
               <Image
                 src={product.img}
                 alt={product.name}
                 fill
-                className="object-cover p-8 sm:p-12"
-                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-contain p-6 sm:p-10 group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
 
             {/* Product info */}
-            <div className="p-4 sm:p-5">
-              <h3 className="text-avenida-text font-bold text-base sm:text-lg mb-1">
+            <div>
+              <h3 className="text-avenida-text font-bold text-sm sm:text-base tracking-wider mb-1">
                 {product.name}
               </h3>
-              <p className="text-avenida-text-muted text-xs sm:text-sm mb-3">
+              <p className="text-avenida-text-muted text-xs mb-3">
                 {product.desc}
               </p>
 
@@ -59,19 +67,23 @@ export default function TiendaPage() {
                 {product.sizes.map((s) => (
                   <span
                     key={s}
-                    className="text-xs border border-avenida-surface px-2 py-0.5 rounded text-avenida-text-muted"
+                    className="text-xs border border-avenida-surface/50 px-2 py-0.5 text-avenida-text-muted"
                   >
                     {s}
                   </span>
                 ))}
               </div>
 
-              {/* Price + buy */}
+              {/* Price + CTA */}
               <div className="flex items-center justify-between">
-                <span className="text-avenida-text font-extrabold text-xl sm:text-2xl">
+                <span className="text-avenida-text font-extrabold text-xl">
                   {product.price}
                 </span>
-                <button className="btn-primary !py-2 !px-4 !text-xs">
+                <button
+                  className="border border-avenida-text/40 text-avenida-text-muted 
+                             hover:text-avenida-text hover:border-avenida-text 
+                             text-xs tracking-wider px-4 py-2 transition-all"
+                >
                   AÑADIR AL CARRITO
                 </button>
               </div>

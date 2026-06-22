@@ -1,98 +1,87 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const MEMBERS = [
-  { name: "Nacho", img: "/assets/fotos/nacho.webp" },
-  { name: "Borja", img: "/assets/fotos/borja.webp" },
-  { name: "Medina", img: "/assets/fotos/medina.webp" },
-  { name: "Loren", img: "/assets/fotos/loren.webp" },
-  { name: "Jacobo", img: "/assets/fotos/jacobo.webp" },
+const BAND_PHOTOS = [
+  { name: "Nacho", src: "/assets/fotos/nacho.webp" },
+  { name: "Borja", src: "/assets/fotos/borja.webp" },
+  { name: "Medina", src: "/assets/fotos/medina.webp" },
+  { name: "Loren", src: "/assets/fotos/loren.webp" },
+  { name: "Jacobo", src: "/assets/fotos/jacobo.webp" },
 ];
 
 const NEXT_SHOWS = [
-  { date: "29 JUN", city: "Burriana", venue: "—" },
-  { date: "4 JUL", city: "El Puerto de Santa María", venue: "—" },
-  { date: "25 JUL", city: "—", venue: "—" },
+  { date: "29 JUN", city: "Burriana" },
+  { date: "4 JUL", city: "El Puerto de Santa María" },
+  { date: "25 JUL", city: "—" },
+  { date: "29 AGO", city: "—" },
 ];
 
 export default function Home() {
   return (
-    <>
-      {/* HERO */}
-      <section className="relative min-h-[90dvh] flex flex-col items-center justify-center px-4 sm:px-6 text-center overflow-hidden">
-        {/* Background: band members grid (desktop) / stacked (mobile) */}
-        <div className="absolute inset-0 opacity-20 sm:opacity-25 pointer-events-none">
-          <div className="hidden sm:grid grid-cols-5 h-full">
-            {MEMBERS.map((m) => (
-              <div key={m.name} className="relative h-full">
-                <Image
-                  src={m.img}
-                  alt={m.name}
-                  fill
-                  className="object-cover object-top"
-                  sizes="20vw"
-                  priority
-                />
-                <div className="absolute inset-0 bg-avenida-blue/60" />
-              </div>
-            ))}
-          </div>
-          {/* Mobile: muñeco group */}
-          <div className="sm:hidden relative h-full">
-            <Image
-              src="/assets/munecos/todos.webp"
-              alt="Avenida"
-              fill
-              className="object-contain p-8"
-              sizes="100vw"
-              priority
-            />
-            <div className="absolute inset-0 bg-avenida-blue/40" />
-          </div>
+    <div className="min-h-dvh">
+      {/* HERO — band photo full-width */}
+      <section className="relative h-dvh sm:h-screen">
+        {/* Main band photo */}
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/fotos/borja.webp"
+            alt="Avenida"
+            fill
+            className="object-cover object-top"
+            sizes="(max-width: 640px) 100vw, 75vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-avenida-blue/30" />
         </div>
 
-        {/* Hero content */}
-        <div className="relative z-10">
+        {/* Hero overlay content */}
+        <div className="relative z-10 h-full flex flex-col justify-end pb-8 sm:pb-12 px-4 sm:px-8 lg:px-12">
           <div className="animate-in">
-            <p className="section-num">01</p>
-            <h1 className="hero-title mb-4">AVENIDA</h1>
-            <p className="text-avenida-text-muted text-lg sm:text-xl max-w-md mx-auto mb-8">
+            <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-extrabold tracking-tighter leading-none mb-4">
+              AVENIDA
+            </h1>
+            <p className="text-avenida-text/80 text-lg sm:text-xl lg:text-2xl max-w-md mb-8">
               La banda de tu vida
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center animate-in stagger-2">
-            <Link href="/conciertos" className="btn-primary">
+          <div className="flex flex-wrap gap-3 animate-in stagger-2">
+            <Link
+              href="/conciertos"
+              className="bg-avenida-text text-avenida-blue font-bold py-3 px-6 
+                         text-sm tracking-wide hover:bg-avenida-accent transition-colors"
+            >
               VER CONCIERTOS
             </Link>
-            <Link href="/musica" className="btn-outline">
+            <Link
+              href="/musica"
+              className="border border-avenida-text text-avenida-text font-bold py-3 px-6 
+                         text-sm tracking-wide hover:bg-avenida-text hover:text-avenida-blue transition-colors"
+            >
               ESCUCHAR
             </Link>
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-avenida-text/40"
-          >
-            <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+        {/* Scroll arrow */}
+        <div className="absolute bottom-4 right-8 animate-bounce hidden sm:block">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               strokeWidth="2" className="text-avenida-text/40">
+            <path d="M7 13l5 5 5-5" />
           </svg>
         </div>
       </section>
 
-      {/* TOUR DATES PREVIEW */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <p className="section-num">02</p>
-            <h2 className="section-title">Próximos conciertos</h2>
+      {/* TOUR DATES section */}
+      <section className="px-4 sm:px-8 lg:px-12 py-16 sm:py-20">
+        <div className="flex items-baseline justify-between mb-8">
+          <div className="flex items-baseline gap-3">
+            <span className="text-xl lg:text-2xl font-extrabold text-avenida-text-muted">
+              02
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
+              CONCIERTOS
+            </h2>
           </div>
           <Link
             href="/conciertos"
@@ -102,108 +91,111 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="space-y-2">
           {NEXT_SHOWS.map((show, i) => (
-            <div key={i} className="tour-card animate-in" style={{ animationDelay: `${0.15 * i}s` }}>
-              <div className="flex items-center gap-4 sm:gap-6">
-                <div className="text-right min-w-[60px] sm:min-w-[80px]">
-                  <p className="text-avenida-text font-bold text-sm sm:text-base leading-tight">
-                    {show.date.split(" ")[0]}
-                  </p>
-                  <p className="text-avenida-text-muted text-xs sm:text-sm leading-tight">
-                    {show.date.split(" ")[1]}
-                  </p>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-avenida-text font-semibold text-sm sm:text-base truncate">
-                    {show.city}
-                  </p>
-                  {show.venue !== "—" && (
-                    <p className="text-avenida-text-muted text-xs truncate">
-                      {show.venue}
-                    </p>
-                  )}
-                </div>
-                <Link
-                  href="/conciertos"
-                  className="text-avenida-text-muted hover:text-avenida-text text-2xl transition-colors shrink-0"
-                >
-                  →
-                </Link>
-              </div>
+            <div
+              key={i}
+              className="flex items-center gap-4 py-3 border-b border-avenida-surface/30 
+                         last:border-0 animate-in"
+              style={{ animationDelay: `${0.1 * i}s` }}
+            >
+              <span className="text-avenida-text font-bold text-sm sm:text-base w-20 sm:w-24 shrink-0">
+                {show.date}
+              </span>
+              <span className="text-avenida-text-muted text-sm sm:text-base flex-1">
+                {show.city}
+              </span>
+              <span className="text-avenida-text-muted text-2xl">→</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* MUSIC SECTION */}
-      <section className="bg-avenida-dark py-16 sm:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <p className="section-num">04</p>
-          <h2 className="section-title">Música</h2>
-
-          <div className="flex flex-col sm:flex-row items-center gap-8">
-            <div className="relative w-48 h-48 sm:w-56 sm:h-56 shrink-0">
-              <Image
-                src="/assets/logo/labanda.webp"
-                alt="La banda de mi vida"
-                fill
-                className="object-cover rounded-xl"
-                sizes="(max-width: 640px) 192px, 224px"
-              />
-            </div>
-            <div className="text-center sm:text-left">
-              <p className="text-avenida-text text-xl sm:text-2xl font-bold mb-2">
-                La banda de mi vida
-              </p>
-              <p className="text-avenida-text-muted text-sm sm:text-base mb-6">
-                Escucha nuestro último single en todas las plataformas
-              </p>
-              <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
-                <Link href="/musica" className="btn-outline text-sm py-2 px-5">
-                  SPOTIFY
-                </Link>
-                <Link href="/musica" className="btn-outline text-sm py-2 px-5">
-                  YOUTUBE
-                </Link>
-              </div>
-            </div>
-          </div>
+      {/* MUSIC section */}
+      <section className="px-4 sm:px-8 lg:px-12 py-16 sm:py-20 border-t border-avenida-surface/30">
+        <div className="flex items-baseline gap-3 mb-8">
+          <span className="text-xl lg:text-2xl font-extrabold text-avenida-text-muted">
+            04
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
+            MÚSICA
+          </h2>
         </div>
-      </section>
 
-      {/* AVENIDAES / CLUB */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-        <div className="text-center">
-          <p className="section-num">05</p>
-          <h2 className="section-title text-center">Avenidaes</h2>
-          <p className="text-avenida-text-muted text-sm sm:text-base max-w-lg mx-auto mb-8">
-            Fotos, vídeos, redes sociales y todo lo que pasa en el mundo Avenida
-          </p>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-md mx-auto mb-8">
-            {MEMBERS.map((m, i) => (
-              <div
-                key={m.name}
-                className="relative aspect-square rounded-xl overflow-hidden bg-avenida-surface animate-in"
-                style={{ animationDelay: `${0.1 * i}s` }}
+        <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+          <div className="relative w-40 h-40 sm:w-48 sm:h-48 shrink-0">
+            <Image
+              src="/assets/logo/labanda.webp"
+              alt="La banda de mi vida"
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 160px, 192px"
+            />
+          </div>
+          <div>
+            <h3 className="text-xl sm:text-2xl font-bold mb-1">
+              La banda de mi vida
+            </h3>
+            <p className="text-avenida-text-muted text-sm mb-4">
+              Disponible en todas las plataformas
+            </p>
+            <div className="flex gap-3">
+              <Link
+                href="/musica"
+                className="border border-avenida-text/40 text-avenida-text-muted 
+                           hover:text-avenida-text hover:border-avenida-text text-xs 
+                           tracking-wider px-4 py-2 transition-all"
               >
-                <Image
-                  src={m.img}
-                  alt={m.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 45vw, 150px"
-                />
-              </div>
-            ))}
+                SPOTIFY
+              </Link>
+              <Link
+                href="/musica"
+                className="border border-avenida-text/40 text-avenida-text-muted 
+                           hover:text-avenida-text hover:border-avenida-text text-xs 
+                           tracking-wider px-4 py-2 transition-all"
+              >
+                YOUTUBE
+              </Link>
+            </div>
           </div>
-
-          <Link href="/avenidaes" className="btn-primary inline-block">
-            ACCESO CLUB
-          </Link>
         </div>
       </section>
-    </>
+
+      {/* BAND members grid */}
+      <section className="px-4 sm:px-8 lg:px-12 py-16 sm:py-20 border-t border-avenida-surface/30">
+        <div className="flex items-baseline gap-3 mb-8">
+          <span className="text-xl lg:text-2xl font-extrabold text-avenida-text-muted">
+            05
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
+            AVENIDA ES
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
+          {BAND_PHOTOS.map((member, i) => (
+            <Link
+              key={member.name}
+              href="/avenidaes"
+              className="relative aspect-[3/4] overflow-hidden group animate-in"
+              style={{ animationDelay: `${0.08 * i}s` }}
+            >
+              <Image
+                src={member.src}
+                alt={member.name}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 15vw"
+              />
+              <div className="absolute inset-0 bg-avenida-blue/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                <span className="text-avenida-text font-bold text-sm">
+                  {member.name}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }
