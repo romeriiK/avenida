@@ -1,5 +1,8 @@
 # Project: Avenida — Web oficial
 
+> 📚 **Documentación completa en [`memories/`](./memories/)** — origen, stack, arquitectura, diseño, deploy y assets.
+> Este `AGENTS.md` es el resumen rápido para entrar en contexto.
+
 ## Stack
 | Capa | Tecnología |
 |------|-----------|
@@ -88,6 +91,11 @@ avenida/
 - ✅ Build limpio (2.1 MB output)
 - ✅ Repo GitHub: https://github.com/romeriiK/avenida
 - ✅ Desplegado en Cloudflare Pages: https://avenida.pages.dev
+- ✅ Auto-deploy vía cronjob cada 5 min (job `7b4b51d754b2`)
+- ✅ Documentación completa en `memories/`
+- ✅ Token CF persistido en VPS (`/root/.cf_pages_token`)
+- ✅ GitHub Actions workflow listo (pendiente añadir secret)
+- ✅ `.gitignore` configurado
 
 ## Pendiente / Mejoras
 - ⬜ Añadir favicon real (usar logo extraído de FRONTAL_PADRES)
@@ -95,7 +103,7 @@ avenida/
 - ⬜ Links reales de Spotify, YouTube, Instagram, TikTok
 - ⬜ Links de venta de entradas en conciertos
 - ⬜ Integración de checkout (Stripe o similar) si se vende merch real
-- ⬜ Hook up Cloudflare Pages git integration para auto-deploy en push
+- ⬜ Añadir secret `CF_PAGES_TOKEN` en GitHub para Actions (opcional — el cronjob ya cubre)
 
 ## Pitfalls
 - El azul `#1223c8` es muy intenso — verificar contraste WCAG con texto blanco
@@ -103,4 +111,5 @@ avenida/
 - Las imágenes de miembros eliminaron el fondo blanco pero pueden tener halos
 - Sin favicon personalizado (usa el default de Next.js)
 - Los links de streaming apuntan a las homepages genéricas (pendiente URLs reales)
-- El token de Cloudflare es Pages-only → no permite auto-deploy via git; requiere deploy manual con `wrangler pages deploy out/`
+- El archivo `cf_token.txt` de Syncthing llega en UTF-16LE (Windows) — convertir con `iconv`
+- El git remote debe apuntar a `github-personal` (no `github.com` a secas)

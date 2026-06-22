@@ -1,6 +1,25 @@
-node_modules/
-.next/
+# build output
 out/
+
+# dependencies
+node_modules/
+.pnpm-store/
+
+# next.js
+.next/
+
+# env
 .env
 .env.local
-*.tsbuildinfo
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# deploy state (local only)
+.avenida_last_deploy
